@@ -1,0 +1,8 @@
+name: qcontrol_infra
+
+include:
+  - kraken.yaml
+  - rabbitmq.yaml
+  - redis.yaml
+  - postgres.yaml
+  - adminer.yaml
