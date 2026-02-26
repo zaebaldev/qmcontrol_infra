@@ -6,3 +6,8 @@ include:
   - redis.yaml
   - postgres.yaml
   - adminer.yaml
+
+networks:
+  qcontrol_network:
+    name: qcontrol_network
+    external: true

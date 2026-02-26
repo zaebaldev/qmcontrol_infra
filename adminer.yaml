@@ -12,6 +12,3 @@ services:
     networks:
       - qcontrol_network
 
-networks:
-  qcontrol_network:
-    external: true

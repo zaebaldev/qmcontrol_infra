@@ -4,6 +4,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
+    container_name: qcontrol_pg
     env_file:
       - .env
     expose:
@@ -11,16 +12,14 @@ services:
     # ports:
     #   - "5432:5432"
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_wDB} -U $${POSTGRES_USER}" ]
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
       interval: 5s
       timeout: 3s
       retries: 3
     networks:
       - qcontrol_network
 
-networks:
-  qcontrol_network:
-    external: true
+
 
 volumes:
   pgdata:

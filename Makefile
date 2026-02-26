@@ -12,7 +12,6 @@ ENV= --env-file .env
 
 .PHONY: network
 network:
-	docker network inspect qcontrol_network >/dev/null 2>&1 || \
 	docker network create qcontrol_network
 
 .PHONY: adminer
