@@ -1,0 +1,9 @@
+services:
+  gateway:
+    image: devopsfaith/krakend:1.2.0
+    network_mode: host
+    volumes:
+      - ./krakend:/etc/krakend
+      - ./krakend/jwks.json:/etc/krakend/jwks.json
+    ports:
+      - 8080:8080

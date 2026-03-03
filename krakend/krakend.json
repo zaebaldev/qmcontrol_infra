@@ -1,0 +1,72 @@
+{
+    "version": 2,
+    "port": 8080,
+    "extra_config": {
+        "github_com/devopsfaith/krakend-gologging": {
+            "level": "INFO",
+            "prefix": "[KRAKEND]",
+            "stdout": true
+        }
+    },
+    "endpoints": [
+        {
+            "endpoint": "/auth/quarry_admin/login",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "headers_to_pass": [
+                "*"
+            ],
+            "backend": [
+                {
+                    "host": [
+                        "http://localhost:8000"
+                    ],
+                    "url_pattern": "/api/v1/auth/quarry_admin/login",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/auth/company_admin/login",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "headers_to_pass": [
+                "*"
+            ],
+            "backend": [
+                {
+                    "host": [
+                        "http://localhost:8000"
+                    ],
+                    "url_pattern": "/api/v1/auth/company_admin/login",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/integrations/didox/token",
+            "method": "POST",
+            "headers_to_pass": [
+                "Authorization"
+            ],
+            "backend": [
+                {
+                    "host": [
+                        "http://localhost:8001"
+                    ],
+                    "url_pattern": "/api/v1/didox/auth/token"
+                }
+            ],
+            "extra_config": {
+                "github.com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_local_path": "/etc/krakend/jwks.json",
+                    "roles_key": "role",
+                    "roles": [
+                        "admin"
+                    ]
+                }
+            }
+        }
+    ]
+}
