@@ -1,5 +1,5 @@
 {
-    "version": 2,
+    "version": 3,
     "port": 8080,
     "extra_config": {
         "github_com/devopsfaith/krakend-gologging": {
@@ -19,7 +19,7 @@
             "backend": [
                 {
                     "host": [
-                        "http://localhost:8000"
+                        "http://auth_service:8000"
                     ],
                     "url_pattern": "/api/v1/auth/quarry_admin/login",
                     "encoding": "no-op"
@@ -56,15 +56,30 @@
                     ],
                     "url_pattern": "/api/v1/didox/auth/token"
                 }
+            ]
+        },
+        {
+            "endpoint": "/api/companies",
+            "method": "GET",
+            "backend": [
+                {
+                    "host": [
+                        "http://localhost:8002"
+                    ],
+                    "url_pattern": "/api/v1/companies"
+                }
             ],
             "extra_config": {
-                "github.com/devopsfaith/krakend-jose/validator": {
+                "auth/validator": {
                     "alg": "RS256",
-                    "jwk_local_path": "/etc/krakend/jwks.json",
                     "roles_key": "role",
                     "roles": [
+                        "quarry_admin",
                         "admin"
-                    ]
+                    ],
+                    "jwk_url": "http://localhost:8000/api/v1/.well-known/jwks.json",
+                    "cache": true,
+                    "disable_jwk_security": true
                 }
             }
         }

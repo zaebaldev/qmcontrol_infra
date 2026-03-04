@@ -1,6 +1,6 @@
 services:
   gateway:
-    image: devopsfaith/krakend:1.2.0
+    image: devopsfaith/krakend:latest
     network_mode: host
     volumes:
       - ./krakend:/etc/krakend
